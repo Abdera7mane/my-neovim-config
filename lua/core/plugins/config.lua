@@ -1,0 +1,11 @@
+require('core.plugins.lualine')
+require('core.plugins.mason')
+require('core.plugins.mason-lspconfig')
+require('core.plugins.nvim-tree')
+require('core.plugins.packer')
+require('core.plugins.gitsigns')
+require('core.plugins.treesitter')
+require('core.plugins.lspconfig')
+require('core.plugins.autopairs')
+require('core.plugins.cmp')
+
