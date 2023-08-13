@@ -1,5 +1,5 @@
 require('nvim-treesitter.configs').setup {
-  ensure_installed = {"lua", "rust", "gdscript"},
+  ensure_installed = {"lua", "rust", "gdscript", "godot_resource", "cpp", "c", "python"},
   sync_install = false,
 
   highlight = {
@@ -15,5 +15,13 @@ require('nvim-treesitter.configs').setup {
       scope_incremental = "grc",
       node_decremental = "grm",
     },
+  },
+
+  indent = {
+    enable = true
+  },
+
+  autopairs = {
+    enable = true
   }
 }

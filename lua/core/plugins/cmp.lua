@@ -1,42 +1,65 @@
 local cmp = require('cmp')
+local luasnip = require("luasnip")
 local lspkind = require('lspkind')
+
+luasnip.config.set_config({
+  history = true,
+  updateevents = "TextChanged,TextChangedI",
+  enable_autosnippets = true,
+})
+luasnip.snippets = require('luasnip_snippets').load_snippets()
+require("luasnip.loaders.from_snipmate").lazy_load()
+require("luasnip.loaders.from_vscode").lazy_load()
+
 lspkind.init({
     mode = 'symbol_text',
     preset = 'codicons',
 
     symbol_map = {
-      Text = "",
-      Method = "",
-      Function = "",
-      Constructor = "",
-      Field = "ﰠ",
-      Variable = "",
-      Class = "ﴯ",
-      Interface = "",
+      Text = "󰉿",
+      Method = "󰰐",
+      Function = "󰊕",
+      Constructor = "󰒓",
+      Field = "󰯻",
+      Variable = "󰰫",
+      Class = "󰙅",
+      Interface = "",
       Module = "",
-      Property = "ﰠ",
-      Unit = "塞",
-      Value = "",
-      Enum = "",
-      Keyword = "",
-      Snippet = "",
-      Color = "",
-      File = "",
-      Reference = "",
-      Folder = "",
-      EnumMember = "",
-      Constant = "",
-      Struct = "פּ",
-      Event = "",
-      Operator = "",
+      Property = "󰰙",
+      Unit = "",
+      Value = "󰎠",
+      Keyword = "󰌆",
+      Snippet = "󰅱",
+      Color = "",
+      File = "",
+      Reference = "󰈇",
+      Folder = "",
+      Enum = "󰯸",
+      EnumMember = "󰯸",
+      Constant = "󰯲",
+      Struct = "󰠱",
+      Event = "󰠠",
+      Operator = "󰆕",
       TypeParameter = ""
     },
 })
 
 cmp.setup({
+  sorting = {
+    comparators = {
+      cmp.config.compare.offset,
+      cmp.config.compare.exact,
+      cmp.config.compare.recently_used,
+      require("clangd_extensions.cmp_scores"),
+      cmp.config.compare.kind,
+      cmp.config.compare.sort_text,
+      cmp.config.compare.length,
+      cmp.config.compare.order,
+    },
+  },
   snippet = {
     expand = function(args)
-      require('luasnip').lsp_expand(args.body)
+      luasnip.lsp_expand(args.body)
     end
   },
   window = {
@@ -102,4 +125,3 @@ cmp.setup.cmdline(':', {
   })
 })
 
-local capabilities = require('cmp_nvim_lsp').default_capabilities()

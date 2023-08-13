@@ -1,9 +1,7 @@
-local palette = require('github-theme.palette.dark_default') {}
-
 local file_format = {
   'fileformat',
   symbols = {
-    unix = " unix",
+    unix = "󰌽 unix",
     dos = " dos",
     mac =" mac"
   }
@@ -12,20 +10,14 @@ local file_format = {
 local diff = {
   'diff',
   colored = true,
-  symbols = {added = ' ', modified = '柳', removed = ' '},
-  diff_color = {
-    added = {
-      fg = palette.git.add
-    },
-    modified = {
-      fg = palette.git.change
-    },
-    removed = {
-      fg = palette.git.delete
-    }
-  }
+  symbols = {added = ' ', modified = ' ', removed = ' '},
 }
 
+local diagnostics = {
+  'diagnostics',
+  colored = true,
+  symbols = {error = ' ', warn = ' ', info = ''}
+}
 
 require('lualine').setup {
   options = {
@@ -48,8 +40,8 @@ require('lualine').setup {
   },
   sections = {
     lualine_a = {'mode'},
-    lualine_b = {'branch', diff, 'diagnostics'},
-    lualine_c = {'filename', 'filesize'},
+    lualine_b = {'branch', diff},
+    lualine_c = {'filename', 'filesize', diagnostics},
     lualine_x = {'encoding', file_format, 'filetype'},
     lualine_y = {'progress'},
     lualine_z = {'location'}
@@ -68,3 +60,4 @@ require('lualine').setup {
   extensions = {}
 }
 
+vim.opt.laststatus = 3
